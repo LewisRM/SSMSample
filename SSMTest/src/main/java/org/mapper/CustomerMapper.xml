@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE  mapper  PUBLIC  "-//mybatis.org//DTD  Mapper  3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="org.mapper.CustomerMapper">
+		
+		<insert id="insert" parameterType="Customer">
+			insert into customer (store_id,first_name,last_name,email,address_id,create_date)
+			  values(#{storeId},#{firstName},#{lastName},#{email},#{addressId},#{createDate})
+		</insert>	
+		
+		<select id="findAllCustomer" resultMap="addressResultMap">
+			select customer_id from customer
+		</select>
+		<resultMap type="Customer" id="addressResultMap">
+			<id property="customerId" column="customer_id"/>
+		</resultMap>
+		
+		<select id="findCustomers" resultMap="customerResultMap">
+			select customer_id,store_id,first_name,email from customer where store_id=2
+		</select>
+		<resultMap type="Customer" id="customerResultMap">
+			<id property="customerId" column="customer_id"/>
+			<result property="storeId" column="store_id"/>
+			<result property="firstName" column="first_name"/>
+			<result property="email" column="email"/>
+		</resultMap>
+		
+
+	</mapper>
